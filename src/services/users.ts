@@ -21,6 +21,13 @@ export const add = async (data: UserCreateData) => {
     } catch (err) { return false }
 }
 
+type UsersUpdateData = Prisma.Args<typeof prisma.user, 'update'>['data']
+export const update = async (id: number, data: UsersUpdateData) => {
+    try {
+        return await prisma.user.update({ where: { id }, data });
+    } catch (err) { return false }
+}
+
 
 export const remove = async (id: number) => {
     try {

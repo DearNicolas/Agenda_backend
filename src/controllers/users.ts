@@ -31,7 +31,7 @@ export const addUser: RequestHandler = async (req, res) => {
     res.json({ error: 'Ocorreu um erro em addUser' });
 }
 
-export const updateUser: RequestHandler = (req, res) => {
+export const updateUser: RequestHandler = async (req, res) => {
     const { id } = req.params;
     const updateUserSchema = z.object({
         name: z.string().optional(),
@@ -39,6 +39,11 @@ export const updateUser: RequestHandler = (req, res) => {
     });
     const body = updateUserSchema.safeParse(req.body);
     if (!body.success) return res.json({ error: 'Dados inválidos' });
+
+    const updatedUser = await users.update(parseInt(id), body.data);
+    if (updatedUser) {
+        return res.json({ user: updatedUser });
+    }
 
     res.json({ error: 'Ocorreu um erro em updateUser' });
 }
