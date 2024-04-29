@@ -16,6 +16,6 @@ router.put('/users/:id', authCo.validate, userCo.updateUser);
 router.delete('/users/:id', authCo.validate, userCo.deleteUser);
 
 router.get('/users/:id_user/contacts', authCo.validate, contactCo.getAll);
-router.get('/users/:id', authCo.validate, contactCo.getContact);
+router.get('/users/:id_user/contacts/:id', authCo.validate, contactCo.getContact);
 
 export default router;

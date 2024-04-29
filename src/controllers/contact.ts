@@ -18,7 +18,7 @@ export const getContact: RequestHandler = async (req, res) => {
 
     const contactItem = await contactServ.getOne({
         id: parseInt(id),
-        id_User: parseInt(id_user)
+        id_user: parseInt(id_user)
     });
     if (contactItem) return res.json({ contact: contactItem })
 }

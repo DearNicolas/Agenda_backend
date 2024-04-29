@@ -9,7 +9,7 @@ export const getAll = async (filters: GetAllFilters) => {
     } catch (err) { return false }
 }
 
-type GetOneFilters = { id_User: number; id?: number; name?: string; }
+type GetOneFilters = { id_user: number; id?: number; name?: string; }
 export const getOne = async (filters: GetOneFilters) => {
     try {
         if (!filters.id && !filters.name) return false;
