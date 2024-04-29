@@ -12,3 +12,13 @@ export const getAll: RequestHandler = async (req, res) => {
 
     res.json({ error: 'Ocorreu um erro em getAll contacts' })
 }
+
+export const getContact: RequestHandler = async (req, res) => {
+    const { id, id_user } = req.params;
+
+    const contactItem = await contactServ.getOne({
+        id: parseInt(id),
+        id_User: parseInt(id_user)
+    });
+    if (contactItem) return res.json({ contact: contactItem })
+}
