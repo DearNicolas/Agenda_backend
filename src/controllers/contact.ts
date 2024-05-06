@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import * as contactServ from '../services/contact';
+import { z } from "zod";
 
 export const getAll: RequestHandler = async (req, res) => {
     const { id_user } = req.params;
@@ -21,4 +22,19 @@ export const getContact: RequestHandler = async (req, res) => {
         id_user: parseInt(id_user)
     });
     if (contactItem) return res.json({ contact: contactItem })
+
+
+    res.json({ error: 'Ocorreu um erro em getAll contacts' })
+}
+
+export const addContact: RequestHandler = async (req, res) => {
+    const { id_user } = req.params;
+
+    const addContactSchema = z.object({
+        name: z.string(),
+        number: z.number(),
+        status: z.string()
+    })
+    const body = addContactSchema.safeParse(req.body);
+    if (!body.success) return res.json({ error: 'Dados invalidos' });
 }
