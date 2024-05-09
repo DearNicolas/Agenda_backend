@@ -12,7 +12,7 @@ CREATE TABLE "Contacts" (
     "id" SERIAL NOT NULL,
     "id_user" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
-    "number" INTEGER NOT NULL,
+    "number" TEXT NOT NULL,
     "status" TEXT NOT NULL,
 
     CONSTRAINT "Contacts_pkey" PRIMARY KEY ("id")

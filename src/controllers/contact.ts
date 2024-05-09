@@ -32,9 +32,19 @@ export const addContact: RequestHandler = async (req, res) => {
 
     const addContactSchema = z.object({
         name: z.string(),
-        number: z.number(),
-        status: z.string()
+        number: z.string().transform(val => val.replace(/\-|()/gm, '')),
+        status: z.boolean()
     })
     const body = addContactSchema.safeParse(req.body);
     if (!body.success) return res.json({ error: 'Dados invalidos' });
+
+    const newContact = await contactServ.add({
+        name: body.data.name,
+        number: body.data.number,
+        status: body.data.status,
+        id_user: parseInt(id_user)
+    })
+    if (newContact) return res.status(201).json({ contact: newContact });
+
+    res.json({ error: 'Ocorreu um erro' });
 }

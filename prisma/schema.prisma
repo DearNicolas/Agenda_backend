@@ -15,10 +15,10 @@ model User {
 }
 
 model Contact {
-  id      Int    @id @default(autoincrement())
+  id      Int     @id @default(autoincrement())
   id_user Int
   name    String
   number  String
-  status  String
-  user    User   @relation(fields: [id_user], references: [id])
+  status  Boolean
+  user    User    @relation(fields: [id_user], references: [id])
 }

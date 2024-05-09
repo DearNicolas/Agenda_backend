@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from "@prisma/client";
+import * as users from './users';
 
 const prisma = new PrismaClient();
 
@@ -15,4 +16,13 @@ export const getOne = async (filters: GetOneFilters) => {
         if (!filters.id && !filters.name) return false;
         return await prisma.contact.findFirst({ where: filters });
     } catch (err) { return false }
+}
+
+type PeopleCreateData = Prisma.Args<typeof prisma.contact, 'create'>['data'];
+export const add = async (data: PeopleCreateData) => {
+    try {
+        if (!data.id_user) return false;
+
+        return await prisma.contact.create({ data });
+    } catch (err) { return false; }
 }

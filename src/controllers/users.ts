@@ -20,7 +20,7 @@ export const getUser: RequestHandler = async (req, res) => {
 export const addUser: RequestHandler = async (req, res) => {
     const addUserSchema = z.object({
         name: z.string(),
-        number: z.number(),
+        number: z.string().transform(val => val.replace(/\-|/gm, '')),
     });
     const body = addUserSchema.safeParse(req.body);
     if (!body.success) return res.json({ error: 'Dados invalidos' });
@@ -35,7 +35,7 @@ export const updateUser: RequestHandler = async (req, res) => {
     const { id } = req.params;
     const updateUserSchema = z.object({
         name: z.string().optional(),
-        number: z.number().optional(),
+        number: z.string().optional(),
     });
     const body = updateUserSchema.safeParse(req.body);
     if (!body.success) return res.json({ error: 'Dados inválidos' });
