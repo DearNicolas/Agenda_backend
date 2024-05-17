@@ -26,3 +26,18 @@ export const add = async (data: PeopleCreateData) => {
         return await prisma.contact.create({ data });
     } catch (err) { return false; }
 }
+
+type ContactUpdateData = Prisma.Args<typeof prisma.contact, 'update'>['data']
+type UpdateFilters = { id?: number; id_user: number; }
+export const update = async (filters: UpdateFilters, data: ContactUpdateData) => {
+    try {
+        return await prisma.contact.updateMany({ where: filters, data });
+    } catch (err) { return false }
+}
+
+type DeleteFilters = { id: number; id_user?: number; }
+export const remove = async (filters: DeleteFilters) => {
+    try {
+        return await prisma.contact.delete({ where: filters });
+    } catch (err) { return false }
+}

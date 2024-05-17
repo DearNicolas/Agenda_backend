@@ -44,7 +44,6 @@ export const updateUser: RequestHandler = async (req, res) => {
     if (updatedUser) {
         return res.json({ user: updatedUser });
     }
-
     res.json({ error: 'Ocorreu um erro em updateUser' });
 }
 
