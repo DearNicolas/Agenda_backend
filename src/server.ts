@@ -4,7 +4,6 @@ import cors from 'cors';
 import https from 'https';
 import http from 'http';
 import adminRoutes from './routers/admin'
-import siteRoutes from './routers/site'
 import { requestIntercepter } from './utils/requestintercepter';
 
 const app = express();
@@ -16,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.all('*', requestIntercepter);
 
 app.use('/admin', adminRoutes);
-app.use('/', siteRoutes);
 
 const runServer = (port: number, server: http.Server) => {
     server.listen(port, () => {
