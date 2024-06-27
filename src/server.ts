@@ -13,11 +13,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.all('*', requestIntercepter);
-
 app.use('/admin', adminRoutes);
 
 const runServer = (port: number, server: http.Server) => {
     server.listen(port, () => {
+        app.use('http://localhost:3001/admin', adminRoutes);
         console.log(`🚀Running at PORT ${port}`)
     })
 }

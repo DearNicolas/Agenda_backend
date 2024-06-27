@@ -9,7 +9,7 @@ export const getAll: RequestHandler = async (req, res) => {
     const items = await contactServ.getAll({
         id_user: parseInt(id_user)
     });
-    if (items) return res.json({ people: items });
+    if (items) return res.json({ contact: items });
 
 
     res.json({ error: 'Ocorreu um erro em getAll contacts' })
@@ -55,7 +55,7 @@ export const updateContact: RequestHandler = async (req, res) => {
 
     const updateContactSchema = z.object({
         name: z.string().optional(),
-        number: z.string().transform(val => val.replace(/\-|/gm, '')).optional(),
+        number: z.string().transform(val => val.replace(/\-|()/gm, '')).optional(),
         status: z.boolean().optional()
     });
     const body = updateContactSchema.safeParse(req.body);
