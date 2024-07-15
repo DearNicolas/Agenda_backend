@@ -13,7 +13,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.all('*', requestIntercepter);
+
 app.use('/admin', adminRoutes);
+
 
 const runServer = (port: number, server: http.Server) => {
     server.listen(port, () => {
@@ -24,6 +26,7 @@ const runServer = (port: number, server: http.Server) => {
 
 const regularServer = http.createServer(app);
 if (process.env.NODE_ENV === 'production') {
+
 } else {
     const serverPort: number = process.env.PORT ? parseInt(process.env.PORT) : 9000;
     runServer(serverPort, regularServer);
